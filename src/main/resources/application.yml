@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: pet-auth
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/pet-auth
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:9090/realms/pet-auth
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: pet-auth-client
+            client-secret: KA7FQ5KiG2ClDsTwT0yLJln2GiSjXXnd
+            scope: openid
+server:
+  port: 8008
+logging:
+  level:
+    org.springframework.security: TRACE

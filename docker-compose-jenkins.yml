@@ -1,0 +1,17 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    restart: always
+    privileged: true # Allows Jenkins to run Docker commands on the host
+    user: root # Might be needed for specific permissions (alternatively, manage permissions via usermod)
+    ports:
+      - "8888:8080" # Web interface port
+      - "50000:50000" # JNLP agent port for build agents
+    volumes:
+      - jenkins_data:/var/jenkins_home # Persists Jenkins data on your host machine
+      - /var/run/docker.sock:/var/run/docker.sock # Mounts the Docker socket to allow Jenkins to manage host Docker
+
+volumes:
+  jenkins_data:
+    driver: local

@@ -1,0 +1,8 @@
+target
+src/main/resources/application-local.properties
+
+.idea
+*.iws
+*.iml
+*.ipr
+*.env
