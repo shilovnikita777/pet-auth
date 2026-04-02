@@ -11,7 +11,7 @@ pipeline {
             steps {
                 git branch: 'master',
                     url: 'https://github.com/shilovnikita777/pet-auth.git',
-                    credentialsId: 'github-mainacc-token'  // если репозиторий приватный
+                    credentialsId: 'github-mainacc-token'
             }
         }
 
@@ -27,7 +27,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml' // публикуем отчёты о тестах
+                    junit 'target/surefire-reports/*.xml'
                 }
             }
         }
@@ -41,7 +41,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deployment step - could be copying jar or starting service'
-                // Здесь может быть, например, копирование JAR-файла на сервер
             }
         }
     }
