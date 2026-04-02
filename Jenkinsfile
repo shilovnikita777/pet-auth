@@ -9,9 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master',
-                    url: 'https://github.com/shilovnikita777/pet-auth.git',
-                    credentialsId: 'github-mainacc-token'
+                checkout scm
             }
         }
 
@@ -33,12 +31,18 @@ pipeline {
         }
 
         stage('Package') {
+            when {
+                branch 'master'
+            }
             steps {
                 sh 'mvn package'
             }
         }
 
         stage('Deploy') {
+            when {
+                branch 'master'
+            }
             steps {
                 echo 'Deployment step - could be copying jar or starting service'
             }
