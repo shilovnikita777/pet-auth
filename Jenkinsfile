@@ -1,27 +1,18 @@
 pipeline {
     agent any
-
-    tools {
-        maven 'maven3'
-        jdk 'jdk17'
-    }
-
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Build') {
             steps {
-                sh 'mvn clean compile'
+                withChecks('Build') {
+                    sh 'mvn clean compile'
+                }
             }
         }
-
         stage('Test') {
             steps {
-                sh 'mvn test'
+                withChecks('Test') {
+                    sh 'mvn test'
+                }
             }
             post {
                 always {
@@ -29,32 +20,21 @@ pipeline {
                 }
             }
         }
-
         stage('Package') {
-            when {
-                branch 'master'
-            }
+            when { branch 'master' }
             steps {
-                sh 'mvn package'
+                withChecks('Package') {
+                    sh 'mvn package'
+                }
             }
         }
-
         stage('Deploy') {
-            when {
-                branch 'master'
-            }
+            when { branch 'master' }
             steps {
-                echo 'Deployment step - could be copying jar or starting service'
+                withChecks('Deploy') {
+                    echo 'Deployment step'
+                }
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline succeeded!'
-        }
-        failure {
-            echo 'Pipeline failed!'
         }
     }
 }
