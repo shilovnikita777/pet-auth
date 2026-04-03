@@ -56,4 +56,5 @@ networks:
 
 volumes:
   postgres_keycloak_data:
+    name: pet-auth_postgres_keycloak_data
     driver: local
