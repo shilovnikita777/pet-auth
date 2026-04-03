@@ -35,6 +35,17 @@ services:
     command:
       - "start-dev"
 
+  pet-auth:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - keycloak
+    environment:
+    restart: unless-stopped
+
 networks:
   keycloak-network:
     driver: bridge
