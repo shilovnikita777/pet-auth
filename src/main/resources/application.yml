@@ -5,11 +5,11 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:9090/realms/pet-auth
+          issuer-uri: ${KEYCLOAK_URL}/realms/pet-auth
       client:
         provider:
           keycloak:
-            issuer-uri: http://localhost:9090/realms/pet-auth
+            issuer-uri: ${KEYCLOAK_URL}/realms/pet-auth
             user-name-attribute: preferred_username
         registration:
           keycloak:
