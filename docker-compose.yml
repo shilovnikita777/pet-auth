@@ -20,12 +20,10 @@ services:
     ports:
       - 9090:8080
     environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak
-      DB_SCHEMA: public
-      DB_USER: shilov
-      DB_PASSWORD: zzz
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: shilov
+      KC_DB_PASSWORD: zzz
       KEYCLOAK_ADMIN: shilov
       KEYCLOAK_ADMIN_PASSWORD: zzz
     networks:
