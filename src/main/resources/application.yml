@@ -9,12 +9,17 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: ${KEYCLOAK_URL}/realms/pet-auth
+            authorization-uri: http://localhost:9090/realms/pet-auth/protocol/openid-connect/auth
+            token-uri: http://keycloak:8080/realms/pet-auth/protocol/openid-connect/token
+            jwk-set-uri: http://keycloak:8080/realms/pet-auth/protocol/openid-connect/certs
+            user-info-uri: http://keycloak:8080/realms/pet-auth/protocol/openid-connect/userinfo
             user-name-attribute: preferred_username
         registration:
           keycloak:
             client-id: pet-auth-client
             client-secret: blDWrYdZpZQE4nXzDerzKZp9gkD3dYNK
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             scope: openid
 server:
   port: 8080
