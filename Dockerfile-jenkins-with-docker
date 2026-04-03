@@ -1,5 +1,18 @@
 FROM jenkins/jenkins:lts
+
 USER root
-RUN apt-get update && apt-get install -y docker.io && rm -rf /var/lib/apt/lists/*
+
+# Устанавливаем Docker CLI
+RUN apt-get update && \
+    apt-get install -y docker.io && \
+    rm -rf /var/lib/apt/lists/*
+
+# Создаём директорию для плагинов Docker и устанавливаем Docker Compose как плагин
+RUN mkdir -p /usr/local/lib/docker/cli-plugins && \
+    curl -SL "https://github.com/docker/compose/releases/download/v2.24.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/lib/docker/cli-plugins/docker-compose && \
+    chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+
+# Добавляем пользователя jenkins в группу docker
 RUN usermod -aG docker jenkins
+
 USER jenkins
