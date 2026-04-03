@@ -3,7 +3,7 @@ services:
     container_name: postgres
     image: postgres:15
     environment:
-      POSTGRES_USER: SHILOV
+      POSTGRES_USER: shilov
       POSTGRES_PASSWORD: zzz
       POSTGRES_DB: keycloak
     volumes:
@@ -24,10 +24,10 @@ services:
       DB_ADDR: postgres
       DB_DATABASE: keycloak
       DB_SCHEMA: public
-      DB_USER: SHILOV
+      DB_USER: shilov
       DB_PASSWORD: zzz
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
+      KEYCLOAK_ADMIN: shilov
+      KEYCLOAK_ADMIN_PASSWORD: zzz
     networks:
       - keycloak-network
     depends_on:
@@ -46,6 +46,8 @@ services:
       KEYCLOAK_URL: http://keycloak:8080
     depends_on:
       - keycloak
+    networks:
+      - keycloak-network
     restart: unless-stopped
 
 networks:
