@@ -14,7 +14,7 @@ spring:
         registration:
           keycloak:
             client-id: pet-auth-client
-            client-secret: GvqotBW9ZUE2Pd1B9LpU0ElvxTeMBBiB
+            client-secret: blDWrYdZpZQE4nXzDerzKZp9gkD3dYNK
             scope: openid
 server:
   port: 8080
